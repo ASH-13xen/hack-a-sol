@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as caretakers from "../caretakers.js";
 import type * as home from "../home.js";
 import type * as http from "../http.js";
 import type * as people from "../people.js";
@@ -21,6 +22,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  caretakers: typeof caretakers;
   home: typeof home;
   http: typeof http;
   people: typeof people;

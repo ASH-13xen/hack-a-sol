@@ -1,28 +1,44 @@
 "use client";
 
-import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar-new";
+import {
+  Sidebar,
+  SidebarBody,
+  SidebarLink,
+  NeuroLinkLogo,
+} from "@/components/ui/sidebar-new";
+import { UserButton } from "@clerk/nextjs";
+
 import { Home, User, Phone, Heart, Map, Settings } from "lucide-react";
-import Link from "next/link";
+
+const iconClass = "h-4 w-4 text-neutral-700 dark:text-neutral-200";
 
 const items = [
-  { label: "Home", href: "/", icon: <Home className="text-[#4c3024]" /> },
-  { label: "People", href: "/KnownPeople", icon: <User className="text-[#4c3024]" /> },
-  { label: "Contact Caretaker", href: "/ContactCaretaker", icon: <Phone className="text-[#4c3024]" /> },
-  { label: "Feel Good", href: "/FeelGood", icon: <Heart className="text-[#4c3024]" /> },
-  { label: "Map to Home", href: "/MapToHome", icon: <Map className="text-[#4c3024]" /> },
-  { label: "Routine", href: "/Routine", icon: <User className="text-[#4c3024]" /> },
-  { label: "To-Do", href: "/To_Do", icon: <User className="text-[#4c3024]" /> },
-  { label: "Settings", href: "/settings", icon: <Settings className="text-[#4c3024]" /> },
+  { label: "Home", href: "/", icon: <Home className={iconClass} /> },
+  { label: "People", href: "/KnownPeople", icon: <User className={iconClass} /> },
+  { label: "Contact Caretaker", href: "/ContactCaretaker", icon: <Phone className={iconClass} /> },
+  { label: "Feel Good", href: "/FeelGood", icon: <Heart className={iconClass} /> },
+  { label: "Map to Home", href: "/MapToHome", icon: <Map className={iconClass} /> },
+  { label: "Routine", href: "/Routine", icon: <User className={iconClass} /> },
+  { label: "To-Do", href: "/To_Do", icon: <User className={iconClass} /> },
+  { label: "Settings", href: "/settings", icon: <Settings className={iconClass} /> },
 ];
 
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarBody className="flex flex-col justify-between">
-        <div className="flex flex-col gap-3 mt-6">
+      <SidebarBody className="flex flex-col justify-start">
+
+        {/* Brand */}
+        <NeuroLinkLogo />
+
+        {/* Menu List */}
+        <div className="flex flex-col gap-1 mt-4">
           {items.map((item) => (
             <SidebarLink key={item.href} link={item} />
           ))}
+        </div>
+        <div className="p-1">
+          <UserButton />
         </div>
       </SidebarBody>
     </Sidebar>

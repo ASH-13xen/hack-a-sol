@@ -33,4 +33,16 @@ export default defineSchema({
     phone: v.string(),
   }).index("by_user", ["userId"]),
 
+
+
+  caretakers: defineTable({
+    userId: v.string(),       // clerk user ID
+    name: v.string(),
+    relation: v.string(),
+    phone: v.string(),
+    email: v.string(),
+    avatar: v.string(),
+    available: v.boolean(),
+    createdAt: v.number(),
+  }).index("by_user", ["userId"]),
 });
