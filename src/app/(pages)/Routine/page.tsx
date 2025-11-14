@@ -1,5 +1,9 @@
-const Routine = () => {
-  return <div>Routine</div>;
-};
+import RoutinePageClient from "@/components/other/RoutinePageClient";
 
-export default Routine;
+export default function RoutinePage() {
+  return (
+    <div className="p-6">
+      <RoutinePageClient />
+    </div>
+  );
+}

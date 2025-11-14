@@ -1,103 +1,30 @@
 "use client";
 
-import {
-  Calendar,
-  Heart,
-  Home,
-  Inbox,
-  Map,
-  Phone,
-  Search,
-  Settings,
-  User,
-} from "lucide-react";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
-
-// --- 1. Import Link for navigation and usePathname for active state ---
+import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar-new";
+import { Home, User, Phone, Heart, Map, Settings } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-// --- 2. Update URLs to match your page routes ---
 const items = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "People",
-    url: "/KnownPeople",
-    icon: User,
-  },
-  {
-    title: "Contact Caretaker",
-    url: "/ContactCaretaker",
-    icon: Phone,
-  },
-  {
-    title: "Feel Good",
-    url: "/FeelGood",
-    icon: Heart,
-  },
-
-  {
-    title: "Map to Home",
-    url: "/MapToHome",
-    icon: Map,
-  },
-  {
-    title: "Routine",
-    url: "/Routine",
-    icon: User,
-  },
-  {
-    title: "To-Do",
-    url: "/To_Do",
-    icon: User,
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings,
-  },
+  { label: "Home", href: "/", icon: <Home className="text-[#4c3024]" /> },
+  { label: "People", href: "/KnownPeople", icon: <User className="text-[#4c3024]" /> },
+  { label: "Contact Caretaker", href: "/ContactCaretaker", icon: <Phone className="text-[#4c3024]" /> },
+  { label: "Feel Good", href: "/FeelGood", icon: <Heart className="text-[#4c3024]" /> },
+  { label: "Map to Home", href: "/MapToHome", icon: <Map className="text-[#4c3024]" /> },
+  { label: "Routine", href: "/Routine", icon: <User className="text-[#4c3024]" /> },
+  { label: "To-Do", href: "/To_Do", icon: <User className="text-[#4c3024]" /> },
+  { label: "Settings", href: "/settings", icon: <Settings className="text-[#4c3024]" /> },
 ];
 
 export function AppSidebar() {
-  // --- 3. Get the current page's path ---
-  const pathname = usePathname();
-
   return (
     <Sidebar>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  {/* --- 4. Set the variant based on active path --- */}
-                  <SidebarMenuButton asChild>
-                    {/* --- 5. Replace <a> with <Link> --- */}
-                    <Link href={item.url}>
-                      <item.icon className="size-4" />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
+      <SidebarBody className="flex flex-col justify-between">
+        <div className="flex flex-col gap-3 mt-6">
+          {items.map((item) => (
+            <SidebarLink key={item.href} link={item} />
+          ))}
+        </div>
+      </SidebarBody>
     </Sidebar>
   );
 }

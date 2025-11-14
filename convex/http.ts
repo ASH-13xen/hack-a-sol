@@ -3,6 +3,7 @@ import { WebhookEvent } from "@clerk/nextjs/server";
 import { Webhook } from "svix";
 import { api } from "./_generated/api";
 import { httpAction } from "./_generated/server";
+import { sendReminders } from "./routines";
 
 const http = httpRouter();
 
@@ -86,6 +87,19 @@ http.route({
     }
 
     return new Response("Webhooks processed successfully", { status: 200 });
+  }),
+});
+
+
+http.route({
+  path: "/cron/sendReminders",
+  method: "POST",
+  handler: httpAction(async (ctx, req) => {
+    const res = await ctx.runAction(api.routines.sendReminders, {});
+    return new Response(JSON.stringify(res), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   }),
 });
 

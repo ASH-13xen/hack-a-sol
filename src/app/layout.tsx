@@ -54,6 +54,8 @@ export default function RootLayout({
             <Toaster richColors />
           </SidebarProvider>
         </ConvexClerkProvider>
+
+        
       </body>
     </html>
   );

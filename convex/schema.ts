@@ -24,4 +24,13 @@ export default defineSchema({
     description: v.optional(v.string()),
     last_interaction_date: v.optional(v.string()),
   }).index("by_patient_id", ["patient_id"]),
+
+
+    routines: defineTable({
+    userId: v.string(),
+    time: v.string(),
+    message: v.string(),
+    phone: v.string(),
+  }).index("by_user", ["userId"]),
+
 });
