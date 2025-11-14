@@ -1,5 +1,9 @@
 "use client";
 
+<<<<<<< HEAD
+import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar-new";
+import { UserButton } from "@clerk/nextjs";
+=======
 import {
   Sidebar,
   SidebarBody,
@@ -8,6 +12,7 @@ import {
 } from "@/components/ui/sidebar-new";
 import { UserButton } from "@clerk/nextjs";
 
+>>>>>>> e2c9c5d0fe0ec696a8ad1a1d92bef64a48fd01c9
 import { Home, User, Phone, Heart, Map, Settings } from "lucide-react";
 
 const iconClass = "h-4 w-4 text-neutral-700 dark:text-neutral-200";
@@ -36,6 +41,7 @@ export function AppSidebar() {
           {items.map((item) => (
             <SidebarLink key={item.href} link={item} />
           ))}
+          <UserButton />
         </div>
         <div className="p-1">
           <UserButton />
