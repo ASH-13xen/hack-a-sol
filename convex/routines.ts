@@ -1,6 +1,7 @@
 import { mutation, query, action } from "./_generated/server";
 import { v } from "convex/values";
 import { api } from "./_generated/api";
+import { Doc } from "./_generated/dataModel";
 
 export type Routine = {
   _id: string;
@@ -63,6 +64,32 @@ export const deleteRoutine = mutation({
 //      SEND REMINDERS ACTION
 // -------------------------
 //
+
+export const getToday = query({
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      return [];
+    }
+
+    // We don't have a 'date' field, so for now we get all routines.
+    // A better implementation would be to add a 'dayOfWeek' field.
+    const routines: Doc<"routines">[] = await ctx.db
+      .query("routines")
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
+      .collect();
+
+    // Sort routines by time (e.g., "09:00" < "13:00")
+    return routines.sort((a, b) => {
+      const [aHours, aMinutes] = a.time.split(":").map(Number);
+      const [bHours, bMinutes] = b.time.split(":").map(Number);
+      if (aHours !== bHours) {
+        return aHours - bHours;
+      }
+      return aMinutes - bMinutes;
+    });
+  },
+});
 
 export const sendReminders = action({
   args: {},
