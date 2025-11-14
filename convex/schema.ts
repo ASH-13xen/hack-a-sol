@@ -1,19 +1,16 @@
+// schema.ts
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
   users: defineTable({
-    // --- EXISTING FIELDS ---
     name: v.string(),
     email: v.string(),
     image: v.optional(v.string()),
     clerkId: v.string(),
-
-    // --- NEW FIELDS ---
-    // Add these two lines to store the map URLs
     homeMapEmbedUrl: v.optional(v.string()),
     homeStreetViewEmbedUrl: v.optional(v.string()),
-  }).index("by_clerk_id", ["clerkId"]), // --- This is your existing 'recognized_people' table ---
+  }).index("by_clerk_id", ["clerkId"]),
 
   recognized_people: defineTable({
     patient_id: v.string(),
@@ -25,12 +22,19 @@ export default defineSchema({
     last_interaction_date: v.optional(v.string()),
   }).index("by_patient_id", ["patient_id"]),
 
-
-    routines: defineTable({
+  routines: defineTable({
     userId: v.string(),
     time: v.string(),
     message: v.string(),
     phone: v.string(),
   }).index("by_user", ["userId"]),
 
+  // ⭐ NEW TODO TABLE
+  todos: defineTable({
+    userId: v.string(),
+    title: v.string(),
+    date: v.string(), // yyyy-mm-dd
+    time: v.string(), // hh:mm:ss
+    completed: v.boolean(),
+  }).index("by_user", ["userId"]),
 });

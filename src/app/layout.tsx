@@ -6,7 +6,7 @@ import { AppSidebar } from "@/components/ui/app-sidebar";
 import ConvexClerkProvider from "@/providers/ConvexClerkProvider";
 // --- IMPORT SONNER ---
 import { Toaster } from "@/components/ui/sonner"; // Assuming you installed it to 'ui'
-import { Navbar } from "../components/other/Navbar";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,11 +42,11 @@ export default function RootLayout({
               {/* --- 2. This wrapper holds the Navbar + Content --- */}
               <div className="flex-1 flex flex-col h-screen">
                 {/* --- 3. Navbar is at the top of this wrapper --- */}
-                <Navbar />
+                
 
                 {/* --- 4. Main content area scrolls independently --- */}
                 <main className="p-6 overflow-auto">
-                  <SidebarTrigger />
+                  
                   {children}
                 </main>
               </div>

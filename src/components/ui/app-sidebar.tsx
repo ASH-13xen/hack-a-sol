@@ -1,6 +1,7 @@
 "use client";
 
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar-new";
+import { UserButton } from "@clerk/nextjs";
 import { Home, User, Phone, Heart, Map, Settings } from "lucide-react";
 import Link from "next/link";
 
@@ -23,6 +24,7 @@ export function AppSidebar() {
           {items.map((item) => (
             <SidebarLink key={item.href} link={item} />
           ))}
+          <UserButton />
         </div>
       </SidebarBody>
     </Sidebar>

@@ -12,6 +12,7 @@ import type * as home from "../home.js";
 import type * as http from "../http.js";
 import type * as people from "../people.js";
 import type * as routines from "../routines.js";
+import type * as todos from "../todos.js";
 import type * as users from "../users.js";
 
 import type {
@@ -25,6 +26,7 @@ declare const fullApi: ApiFromModules<{
   http: typeof http;
   people: typeof people;
   routines: typeof routines;
+  todos: typeof todos;
   users: typeof users;
 }>;
 
