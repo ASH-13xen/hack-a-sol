@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import ConvexClerkProvider from "@/providers/ConvexClerkProvider";
-// --- IMPORT SONNER ---
-import { Toaster } from "@/components/ui/sonner"; // Assuming you installed it to 'ui'
+import { Toaster } from "@/components/ui/sonner";
 import { Sidebar } from "@/components/ui/sidebar-new";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,9 +25,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
@@ -36,32 +35,26 @@ export default function RootLayout({
       >
         <ConvexClerkProvider>
           <SidebarProvider>
-
             <Sidebar>
-          <div className="flex"></div>
-            {/* --- 1. This flex container holds the sidebar and main content --- */}
-            <div className="flex">
-              <AppSidebar />
+              <div className="flex"></div>
 
-              {/* --- 2. This wrapper holds the Navbar + Content --- */}
-              <div className="flex-1 flex flex-col h-screen">
-                {/* --- 3. Navbar is at the top of this wrapper --- */}
-               
+              {/* --- This flex container holds the sidebar and main content --- */}
+              <div className="flex">
+                <AppSidebar />
 
-                {/* --- 4. Main content area scrolls independently --- */}
-                <main className="p-6 overflow-auto">
-                  
-                  {children}
-                </main>
+                {/* --- Main content wrapper --- */}
+                <div className="flex-1 flex flex-col h-screen">
+                  {/* (Your Navbar was removed earlier so nothing here) */}
+
+                  {/* --- Main content area scrolls independently --- */}
+                  <main className="p-6 overflow-auto">{children}</main>
+                </div>
               </div>
-            </div>
-            <Toaster richColors />
 
-             </Sidebar>
+              <Toaster richColors />
+            </Sidebar>
           </SidebarProvider>
         </ConvexClerkProvider>
-
-        
       </body>
     </html>
   );

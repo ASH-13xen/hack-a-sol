@@ -29,7 +29,7 @@ export default defineSchema({
     phone: v.string(),
   }).index("by_user", ["userId"]),
 
-  // ⭐ NEW TODO TABLE
+  // ⭐ TODO TABLE
   todos: defineTable({
     userId: v.string(),
     title: v.string(),

@@ -57,7 +57,6 @@ export function AppSidebar() {
           ))}
         </div>
         <div className="p-1">
-          <UserButton />
         </div>
       </SidebarBody>
     </Sidebar>
