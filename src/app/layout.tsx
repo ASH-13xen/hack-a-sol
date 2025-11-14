@@ -6,11 +6,7 @@ import { AppSidebar } from "@/components/ui/app-sidebar";
 import ConvexClerkProvider from "@/providers/ConvexClerkProvider";
 // --- IMPORT SONNER ---
 import { Toaster } from "@/components/ui/sonner"; // Assuming you installed it to 'ui'
-<<<<<<< HEAD
-=======
 import { Sidebar } from "@/components/ui/sidebar-new";
->>>>>>> e2c9c5d0fe0ec696a8ad1a1d92bef64a48fd01c9
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,36 +35,24 @@ export default function RootLayout({
       >
         <ConvexClerkProvider>
           <SidebarProvider>
-
             <Sidebar>
-          <div className="flex"></div>
-            {/* --- 1. This flex container holds the sidebar and main content --- */}
-            <div className="flex">
-              <AppSidebar />
+              <div className="flex"></div>
+              {/* --- 1. This flex container holds the sidebar and main content --- */}
+              <div className="flex">
+                <AppSidebar />
 
-              {/* --- 2. This wrapper holds the Navbar + Content --- */}
-              <div className="flex-1 flex flex-col h-screen">
-                {/* --- 3. Navbar is at the top of this wrapper --- */}
-<<<<<<< HEAD
-                
-=======
-               
->>>>>>> e2c9c5d0fe0ec696a8ad1a1d92bef64a48fd01c9
+                {/* --- 2. This wrapper holds the Navbar + Content --- */}
+                <div className="flex-1 flex flex-col h-screen">
+                  {/* --- 3. Navbar is at the top of this wrapper --- */}
 
-                {/* --- 4. Main content area scrolls independently --- */}
-                <main className="p-6 overflow-auto">
-                  
-                  {children}
-                </main>
+                  {/* --- 4. Main content area scrolls independently --- */}
+                  <main className="p-6 overflow-auto">{children}</main>
+                </div>
               </div>
-            </div>
-            <Toaster richColors />
-
-             </Sidebar>
+              <Toaster richColors />
+            </Sidebar>
           </SidebarProvider>
         </ConvexClerkProvider>
-
-        
       </body>
     </html>
   );

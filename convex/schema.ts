@@ -29,19 +29,8 @@ export default defineSchema({
     phone: v.string(),
   }).index("by_user", ["userId"]),
 
-<<<<<<< HEAD
-  // ⭐ NEW TODO TABLE
-  todos: defineTable({
-    userId: v.string(),
-    title: v.string(),
-    date: v.string(), // yyyy-mm-dd
-    time: v.string(), // hh:mm:ss
-    completed: v.boolean(),
-=======
-
-
   caretakers: defineTable({
-    userId: v.string(),       // clerk user ID
+    userId: v.string(), // clerk user ID
     name: v.string(),
     relation: v.string(),
     phone: v.string(),
@@ -49,6 +38,5 @@ export default defineSchema({
     avatar: v.string(),
     available: v.boolean(),
     createdAt: v.number(),
->>>>>>> e2c9c5d0fe0ec696a8ad1a1d92bef64a48fd01c9
   }).index("by_user", ["userId"]),
 });

@@ -1,9 +1,5 @@
 "use client";
 
-<<<<<<< HEAD
-import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar-new";
-import { UserButton } from "@clerk/nextjs";
-=======
 import {
   Sidebar,
   SidebarBody,
@@ -12,27 +8,45 @@ import {
 } from "@/components/ui/sidebar-new";
 import { UserButton } from "@clerk/nextjs";
 
->>>>>>> e2c9c5d0fe0ec696a8ad1a1d92bef64a48fd01c9
 import { Home, User, Phone, Heart, Map, Settings } from "lucide-react";
 
 const iconClass = "h-4 w-4 text-neutral-700 dark:text-neutral-200";
 
 const items = [
   { label: "Home", href: "/", icon: <Home className={iconClass} /> },
-  { label: "People", href: "/KnownPeople", icon: <User className={iconClass} /> },
-  { label: "Contact Caretaker", href: "/ContactCaretaker", icon: <Phone className={iconClass} /> },
-  { label: "Feel Good", href: "/FeelGood", icon: <Heart className={iconClass} /> },
-  { label: "Map to Home", href: "/MapToHome", icon: <Map className={iconClass} /> },
+  {
+    label: "People",
+    href: "/KnownPeople",
+    icon: <User className={iconClass} />,
+  },
+  {
+    label: "Contact Caretaker",
+    href: "/ContactCaretaker",
+    icon: <Phone className={iconClass} />,
+  },
+  {
+    label: "Feel Good",
+    href: "/FeelGood",
+    icon: <Heart className={iconClass} />,
+  },
+  {
+    label: "Map to Home",
+    href: "/MapToHome",
+    icon: <Map className={iconClass} />,
+  },
   { label: "Routine", href: "/Routine", icon: <User className={iconClass} /> },
   { label: "To-Do", href: "/To_Do", icon: <User className={iconClass} /> },
-  { label: "Settings", href: "/settings", icon: <Settings className={iconClass} /> },
+  {
+    label: "Settings",
+    href: "/settings",
+    icon: <Settings className={iconClass} />,
+  },
 ];
 
 export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarBody className="flex flex-col justify-start">
-
         {/* Brand */}
         <NeuroLinkLogo />
 
@@ -44,7 +58,6 @@ export function AppSidebar() {
           <UserButton />
         </div>
         <div className="p-1">
-          <UserButton />
         </div>
       </SidebarBody>
     </Sidebar>
