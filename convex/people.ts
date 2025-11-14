@@ -62,11 +62,38 @@ export const getRecognizedPeople = query({
       return [];
     }
 
-    // Fetch all people associated with the logged-in patient
-    return await ctx.db
+    // 1. Fetch all people
+    const people = await ctx.db
       .query("recognized_people")
       .withIndex("by_patient_id", (q) => q.eq("patient_id", patientId))
       .collect();
+
+    // 2. --- NEW: Map over people to get a displayable URL for their image ---
+    const peopleWithImageUrls = await Promise.all(
+      people.map(async (person) => {
+        // Get the first image (storageId) from the array
+        const firstImageId = person.face_image_urls[0];
+        let displayImageUrl: string | null = null;
+
+        if (firstImageId) {
+          try {
+            // Get a public URL for the stored image
+            displayImageUrl = await ctx.storage.getUrl(firstImageId);
+          } catch (err) {
+            // If file not found or storage ID is invalid, it will be null
+            console.warn(`Could not get image URL for ${firstImageId}`, err);
+          }
+        }
+
+        // 3. Return the person object with the new displayImageUrl field
+        return {
+          ...person,
+          displayImageUrl: displayImageUrl,
+        };
+      })
+    );
+
+    return peopleWithImageUrls;
   },
 });
 
@@ -102,5 +129,42 @@ export const updatePersonDescription = mutation({
 
     console.log(`Updated description for: ${person.full_name}`);
     return { success: true, updatedName: person.full_name };
+  },
+});
+
+/**
+ * 5. --- NEW ---
+ * Mutation to DELETE a recognized person and their stored images.
+ */
+export const deletePerson = mutation({
+  args: {
+    personId: v.id("recognized_people"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Not authenticated.");
+    }
+
+    // Security check: Ensure the person belongs to the logged-in user
+    const person = await ctx.db.get(args.personId);
+    if (!person || person.patient_id !== identity.subject) {
+      throw new Error("Not authorized to delete this person.");
+    }
+
+    // Delete all associated images from file storage
+    for (const storageId of person.face_image_urls) {
+      try {
+        await ctx.storage.delete(storageId);
+      } catch (err) {
+        // Log error but continue, so we can delete the main record
+        console.warn(`Failed to delete storage file ${storageId}:`, err);
+      }
+    }
+
+    // Delete the database record
+    await ctx.db.delete(args.personId);
+
+    return { success: true, deletedName: person.full_name };
   },
 });

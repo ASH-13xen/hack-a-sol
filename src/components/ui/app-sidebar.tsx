@@ -1,5 +1,16 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+"use client";
 
+import {
+  Calendar,
+  Heart,
+  Home,
+  Inbox,
+  Map,
+  Phone,
+  Search,
+  Settings,
+  User,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -11,36 +22,59 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-// Menu items.
+// --- 1. Import Link for navigation and usePathname for active state ---
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+// --- 2. Update URLs to match your page routes ---
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "People",
+    url: "/KnownPeople",
+    icon: User,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
+    title: "Contact Caretaker",
+    url: "/ContactCaretaker",
+    icon: Phone,
   },
   {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Feel Good",
+    url: "/FeelGood",
+    icon: Heart,
+  },
+
+  {
+    title: "Map to Home",
+    url: "/MapToHome",
+    icon: Map,
+  },
+  {
+    title: "Routine",
+    url: "/Routine",
+    icon: User,
+  },
+  {
+    title: "To-Do",
+    url: "/To_Do",
+    icon: User,
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/settings",
     icon: Settings,
   },
 ];
 
 export function AppSidebar() {
+  // --- 3. Get the current page's path ---
+  const pathname = usePathname();
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -50,11 +84,13 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
+                  {/* --- 4. Set the variant based on active path --- */}
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
+                    {/* --- 5. Replace <a> with <Link> --- */}
+                    <Link href={item.url}>
+                      <item.icon className="size-4" />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

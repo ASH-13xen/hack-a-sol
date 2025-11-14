@@ -3,22 +3,25 @@ import { v } from "convex/values";
 
 export default defineSchema({
   users: defineTable({
+    // --- EXISTING FIELDS ---
     name: v.string(),
     email: v.string(),
     image: v.optional(v.string()),
     clerkId: v.string(),
-  }).index("by_clerk_id", ["clerkId"]), // --- Table for Recognized People (Memory Storage) ---
+
+    // --- NEW FIELDS ---
+    // Add these two lines to store the map URLs
+    homeMapEmbedUrl: v.optional(v.string()),
+    homeStreetViewEmbedUrl: v.optional(v.string()),
+  }).index("by_clerk_id", ["clerkId"]), // --- This is your existing 'recognized_people' table ---
+
   recognized_people: defineTable({
     patient_id: v.string(),
     full_name: v.string(),
     relationship: v.string(),
     face_image_urls: v.array(v.string()),
     face_embedding: v.array(v.float64()),
-
-    // --- NEW FIELD ---
-    // This will store notes, memories, or context.
     description: v.optional(v.string()),
-
     last_interaction_date: v.optional(v.string()),
   }).index("by_patient_id", ["patient_id"]),
 });
