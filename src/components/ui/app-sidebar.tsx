@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/sidebar-new";
 import { UserButton } from "@clerk/nextjs";
 
-import { Home, User, Phone, Heart, Map, Settings } from "lucide-react";
+import { Home, User, Phone, Heart, Map, Settings, Mic } from "lucide-react";
 
 const iconClass = "h-4 w-4 text-neutral-700 dark:text-neutral-200";
 
@@ -36,6 +36,8 @@ const items = [
   },
   { label: "Routine", href: "/Routine", icon: <User className={iconClass} /> },
   { label: "To-Do", href: "/To_Do", icon: <User className={iconClass} /> },
+  { label: "Mic", href: "/JournalAI", icon: <Mic className={iconClass} /> },
+
   {
     label: "Settings",
     href: "/settings",
@@ -56,8 +58,7 @@ export function AppSidebar() {
             <SidebarLink key={item.href} link={item} />
           ))}
         </div>
-        <div className="p-1">
-        </div>
+        <div className="p-1"></div>
       </SidebarBody>
     </Sidebar>
   );

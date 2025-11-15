@@ -29,18 +29,16 @@ export default defineSchema({
     phone: v.string(),
   }).index("by_user", ["userId"]),
 
-  // ⭐ TODO TABLE
   todos: defineTable({
     userId: v.string(),
     title: v.string(),
-    date: v.string(), // yyyy-mm-dd
-    time: v.string(), // hh:mm:ss
+    date: v.string(),
+    time: v.string(),
     completed: v.boolean(),
   }).index("by_user", ["userId"]),
 
-  // ⭐ CARETAKER TABLE
   caretakers: defineTable({
-    userId: v.string(), // clerk user ID
+    userId: v.string(),
     name: v.string(),
     relation: v.string(),
     phone: v.string(),
@@ -49,4 +47,18 @@ export default defineSchema({
     available: v.boolean(),
     createdAt: v.number(),
   }).index("by_user", ["userId"]),
+
+  voice_logs: defineTable({
+    userId: v.string(),
+    text: v.string(),
+    timestamp: v.number(),
+  }).index("by_user", ["userId"]),
+
+  // ⭐ NEW: Store FULL DAILY LOGS
+  daily_logs: defineTable({
+    userId: v.string(),
+    date: v.string(), // yyyy-mm-dd
+    logs: v.array(v.string()), // list of text logs
+    createdAt: v.number(),
+  }).index("by_user_date", ["userId", "date"]),
 });
